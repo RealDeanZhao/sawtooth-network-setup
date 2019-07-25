@@ -39,7 +39,7 @@ function sedFile() {
 
 function generateValadatorNetworkKeyPair() {
     python3 /sawtooth-network-setup/network_key_pair.py >/tmp/network_key_pair.txt
-    cat /tmp/network_key_pair.txt
+    #cat /tmp/network_key_pair.txt
     VALIDATOR_CONFIG_NETWORK_PUBLIC_KEY=$(sed '1q;d' /tmp/network_key_pair.txt)
     VALIDATOR_CONFIG_NETWORK_PRIVATE_KEY=$(sed '2q;d' /tmp/network_key_pair.txt)
     rm /tmp/network_key_pair.txt
