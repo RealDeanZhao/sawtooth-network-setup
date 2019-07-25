@@ -13,7 +13,7 @@ function generateGenesisBatch() {
     sawset proposal create --key ~/.sawtooth/keys/my_key.priv -o config-consensus.batch \
         sawtooth.consensus.algorithm.name=pbft \
         sawtooth.consensus.algorithm.version=1.0 \
-        sawtooth.consensus.pbft.members=\'[\"$(cat /etc/sawtooth/keys/validator.pub)\"]\'
+        sawtooth.consensus.pbft.members='[\"$(cat /etc/sawtooth/keys/validator.pub)\"]'
 
     echo "Generating genesis.batch"
     sawadm genesis config-genesis.batch config-consensus.batch
