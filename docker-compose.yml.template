@@ -1,0 +1,69 @@
+version: '3.6'
+
+services:
+  intkey-tp:
+    image: hyperledger/sawtooth-intkey-tp-python:chime
+    container_name: sawtooth-intkey-tp-python
+    expose:
+      - 4004
+    command: intkey-tp-python -C tcp://validator:4004
+    stop_signal: SIGKILL
+
+  rest-api:
+    image: hyperledger/sawtooth-rest-api:chime
+    container_name: sawtooth-rest-api
+    ports:
+     - 8008:8008
+    expose:
+      - 8008
+    command: |
+      bash -c \"
+        sawtooth-rest-api \\
+          --connect tcp://validator:4004 \\
+          --bind 0.0.0.0:8008
+      \"
+    stop_signal: SIGKILL
+
+  settings-tp:
+    image: hyperledger/sawtooth-settings-tp:chime
+    container_name: sawtooth-settings-tp
+    expose:
+      - 4004
+    command: settings-tp -C tcp://validator:4004
+    stop_signal: SIGKILL
+
+  validator:
+    image: hyperledger/sawtooth-validator:chime
+    container_name: sawtooth-validator
+    expose:
+      - 4004
+      - 5050
+      - 8800
+    ports:
+      - 8800:8800
+    volumes:
+      - ./data/home/.sawtooth:/root/.sawtooth
+      - ./data/etc/sawtooth:/etc/sawtooth
+      - ./data/lib/sawtooth:/var/lib/sawtooth
+    command: |
+      bash -c \"
+        sawtooth-validator -vv
+      \"
+
+  pbft:
+    image: hyperledger/sawtooth-pbft-engine:chime
+    container_name: sawtooth-pbft-engine
+    command: pbft-engine -vv --connect tcp://validator:5050
+    stop_signal: SIGKILL
+    volumes:
+      - ./data/home/.sawtooth:/root/.sawtooth
+      - ./data/etc/sawtooth:/etc/sawtooth
+      - ./data/lib/sawtooth:/var/lib/sawtooth
+
+  xo-tp:
+    image: hyperledger/sawtooth-xo-tp-python:chime
+    container_name: sawtooth-xo-tp-python
+    expose:
+      - 4004
+    command: xo-tp-python -vv -C tcp://validator:4004
+    stop_signal: SIGKILL
