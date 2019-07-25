@@ -35,3 +35,13 @@ function getInputWithDefault() {
 
     eval $__resultvar="'$__newValue'"
 }
+
+function generateKeys() {
+    echo "Generate user key"
+    sawtooth keygen my_key
+    printf "User public key: %b\n" $(cat ~/.sawtooth/keys/my_key.pub)
+
+    echo "Generate validator key"
+    sawadm keygen
+    printf "Validator public key: %b\n" $(cat /etc/sawtooth/keys/validator.pub)
+}
