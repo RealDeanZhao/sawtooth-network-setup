@@ -37,6 +37,7 @@ function generateComposeFile() {
 }
 
 function main() {
+    generateKeys
     readInputs
     initValidatorConfig
     copyThings
