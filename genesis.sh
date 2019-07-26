@@ -7,8 +7,6 @@ function readInputs() {
 }
 
 function generateGenesisBatch() {
-    generateKeys
-
     echo "Generate genesis config"
     cd /tmp
     sawset genesis --key ~/.sawtooth/keys/my_key.priv -o config-genesis.batch
