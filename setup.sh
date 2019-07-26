@@ -5,8 +5,8 @@ function main() {
 
     flagmain=true
     echo -e $YELLOW'Please select an option: \n' \
-        $GREEN'1) Create Network \n' \
-        $PINK'2) Join Network \n' \
+        $GREEN'1) Create Basic Node \n' \
+        $PINK'2) Create Genesis Batch \n' \
         $RED'3) Exit'
 
     printf $WHITE'option: '$COLOR_END
@@ -15,10 +15,10 @@ function main() {
 
     case $option in
     1)
-        ./create_network.sh $@
+        ./node.sh $@
         ;;
     2)
-        ./join_network.sh $@
+        ./genesis.sh $@
         ;;
     3)
         flagmain=false
