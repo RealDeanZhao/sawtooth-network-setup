@@ -13,14 +13,14 @@ services:
     image: hyperledger/sawtooth-rest-api:chime
     container_name: $SAWTOOH_NODE_NAME-rest-api
     ports:
-     - 8008:8008
+     - $REST_API_CONFIG_PORT:$REST_API_CONFIG_PORT
     expose:
-      - 8008
+      - $REST_API_CONFIG_PORT
     command: |
       bash -c \"
         sawtooth-rest-api \\
           --connect tcp://$SAWTOOH_NODE_NAME-validator:4004 \\
-          --bind 0.0.0.0:8008
+          --bind 0.0.0.0:$REST_API_CONFIG_PORT
       \"
     stop_signal: SIGKILL
 
@@ -38,13 +38,13 @@ services:
     expose:
       - 4004
       - 5050
-      - 8800
+      - $VALIDATOR_CONFIG_ENDPOINT_PORT
     ports:
-      - 8800:8800
+      - $VALIDATOR_CONFIG_ENDPOINT_PORT:$VALIDATOR_CONFIG_ENDPOINT_PORT
     volumes:
-      - ./nodes/$SAWTOOH_NODE_NAME/home/.sawtooth:/root/.sawtooth
-      - ./nodes/$SAWTOOH_NODE_NAME/etc/sawtooth:/etc/sawtooth
-      - ./nodes/$SAWTOOH_NODE_NAME/lib/sawtooth:/var/lib/sawtooth
+      - ./home/.sawtooth:/root/.sawtooth
+      - ./etc/sawtooth:/etc/sawtooth
+      - ./lib/sawtooth:/var/lib/sawtooth
     command: |
       bash -c \"
         sawtooth-validator -vv
@@ -56,9 +56,9 @@ services:
     command: pbft-engine -vv --connect tcp://$SAWTOOH_NODE_NAME-validator:5050
     stop_signal: SIGKILL
     volumes:
-      - ./nodes/$SAWTOOH_NODE_NAME/home/.sawtooth:/root/.sawtooth
-      - ./nodes/$SAWTOOH_NODE_NAME/etc/sawtooth:/etc/sawtooth
-      - ./nodes/$SAWTOOH_NODE_NAME/lib/sawtooth:/var/lib/sawtooth
+      - ./home/.sawtooth:/root/.sawtooth
+      - ./etc/sawtooth:/etc/sawtooth
+      - ./lib/sawtooth:/var/lib/sawtooth
 
   $SAWTOOH_NODE_NAME-xo-tp:
     image: hyperledger/sawtooth-xo-tp-python:chime

@@ -1,12 +1,12 @@
 bind = [
-  'network:$VALIDATOR_CONFIG_BIND_NETWORK',
-  'component:$VALIDATOR_CONFIG_BIND_COMPONENT',
-  'consensus:$VALIDATOR_CONFIG_BIND_CONSENSUS'
+  'network:0.0.0.0:$VALIDATOR_CONFIG_ENDPOINT_PORT',
+  'component:0.0.0.0:4004',
+  'consensus:0.0.0.0:5050'
 ]
 
 peering = 'static'
 
-endpoint = '$VALIDATOR_CONFIG_ENDPOINT'
+endpoint = '$VALIDATOR_CONFIG_ENDPOINT:$VALIDATOR_CONFIG_ENDPOINT_PORT'
 
 peers = [$VALIDATOR_CONFIG_PEERS]
 

@@ -3,11 +3,10 @@ source ./common.sh
 
 function readInputs() {
     getInputWithDefault "Please enter the node_name" "sawtooth_node" SAWTOOH_NODE_NAME $GREEN
-    getInputWithDefault "Please enter the bind_network" "tcp://0.0.0.0:8800" VALIDATOR_CONFIG_BIND_NETWORK $GREEN
-    getInputWithDefault "Please enter the bind_compoenent" "tcp://0.0.0.0:4004" VALIDATOR_CONFIG_BIND_COMPONENT $GREEN
-    getInputWithDefault "Please enter the bind_consensus" "tcp://0.0.0.0:5050" VALIDATOR_CONFIG_BIND_CONSENSUS $GREEN
-    getInputWithDefault "Please enter the endpoint" "tcp://0.0.0.0:8800" VALIDATOR_CONFIG_ENDPOINT $GREEN
-    getInputWithDefault "Please enter the peers" "\"tcp://127.0.0.1:8800\"" VALIDATOR_CONFIG_PEERS $GREEN
+    getInputWithDefault "Please enter the endpoint" "tcp://0.0.0.0" VALIDATOR_CONFIG_ENDPOINT $GREEN
+    getInputWithDefault "Please enter the endpoint port" "8800" VALIDATOR_CONFIG_ENDPOINT_PORT $GREEN
+    getInputWithDefault "Please enter the peers" "\"\"" VALIDATOR_CONFIG_PEERS $GREEN
+    getInputWithDefault "Please enter the rest api port" "8008" REST_API_CONFIG_PORT $GREEN
 }
 
 function generateValadatorNetworkKeyPair() {
