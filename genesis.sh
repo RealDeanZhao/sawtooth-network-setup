@@ -29,6 +29,7 @@ function copyThings() {
 
 function main() {
     readInputs
+    generateGenesisBatch
     copyThings
 }
 

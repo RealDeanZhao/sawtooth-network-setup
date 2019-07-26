@@ -1,24 +1,6 @@
 #!/bin/bash
 source ./common.sh
 
-function generateGenesisBatch() {
-    generateKeys
-
-    echo "Generate genesis config"
-    cd /tmp
-    sawset genesis --key ~/.sawtooth/keys/my_key.priv -o config-genesis.batch
-
-    echo "Initialize consensus settings "
-    #echo \'[\"$(cat /etc/sawtooth/keys/validator.pub)\"]\'
-    sawset proposal create --key ~/.sawtooth/keys/my_key.priv -o config-consensus.batch \
-        sawtooth.consensus.algorithm.name=pbft \
-        sawtooth.consensus.algorithm.version=1.0 \
-        sawtooth.consensus.pbft.members=[\"$(cat /etc/sawtooth/keys/validator.pub)\"]
-
-    echo "Generating genesis.batch"
-    sawadm genesis config-genesis.batch config-consensus.batch
-}
-
 function readInputs() {
     getInputWithDefault "Please enter the bind_network" "tcp://0.0.0.0:8800" VALIDATOR_CONFIG_BIND_NETWORK $GREEN
     getInputWithDefault "Please enter the bind_compoenent" "tcp://0.0.0.0:4004" VALIDATOR_CONFIG_BIND_COMPONENT $GREEN
@@ -55,7 +37,6 @@ function generateComposeFile() {
 }
 
 function main() {
-    generateGenesisBatch
     readInputs
     initValidatorConfig
     copyThings
