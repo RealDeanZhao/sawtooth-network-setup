@@ -9,10 +9,11 @@ function readInputs() {
 function generateGenesisBatch() {
     echo "Generate genesis config"
     cd /tmp
-    sawset genesis --key ~/.sawtooth/keys/my_key.priv -o config-genesis.batch
+    MY_KEY_FILE=/sawtooth-network-setup/nodes/$SAWTOOH_NODE_NAME/home/.sawtooth/keys/my_key.priv
+    sawset genesis --key $MY_KEY_FILE -o config-genesis.batch
 
     echo "Initialize consensus settings "
-    sawset proposal create --key ~/.sawtooth/keys/my_key.priv -o config-consensus.batch \
+    sawset proposal create --key $MY_KEY_FILE -o config-consensus.batch \
         sawtooth.consensus.algorithm.name=pbft \
         sawtooth.consensus.algorithm.version=1.0 \
         sawtooth.consensus.pbft.members=$PBFT_MEMBER_LIST
