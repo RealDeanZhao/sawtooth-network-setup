@@ -5,11 +5,11 @@ function main() {
     echo -e $YELLOW'Please select an option: \n' \
         $GREEN'1) Create Basic Node \n' \
         $PINK'2) Create Genesis Batch \n' \
-        $BLUE'3) Start Node \n' \
-        $YELLOW'4) Stop Node \n' \
-        $PINK'5) Restart Node \n' \
-        $CYAN'6) Log \n' \
-        $WHITE'7) Other Tools \n' \
+        $BLUE'3) Start Project \n' \
+        $YELLOW'4) Stop Project \n' \
+        $PINK'5) Restart Project \n' \
+        $CYAN'l) Log \n' \
+        $WHITE'x) Other Tools \n' \
         $RED'0) Exit'
 
     printf $WHITE'option: '$COLOR_END
@@ -18,12 +18,10 @@ function main() {
 
     case $option in
     1)
-        docker run -it --name sawtooth-network-setup -v ${PWD}:/sawtooth-network-setup zestxjest/sawtooth-network-setup:latest ./node.sh $@
-        docker rm -f sawtooth-network-setup
+        ./node.sh $@
         ;;
     2)
-        docker run -it --name sawtooth-network-setup -v ${PWD}:/sawtooth-network-setup zestxjest/sawtooth-network-setup:latest ./genesis.sh $@
-        docker rm -f sawtooth-network-setup
+        ./genesis.sh $@
         ;;
     3)
         ./node-start.sh $@
@@ -34,10 +32,10 @@ function main() {
     5)
         ./node-restart.sh $@
         ;;
-    6)
+    l)
         ./node-log.sh $@
         ;;
-    7)
+    x)
         ./tools.sh $@
         ;;
     0) echo "Bye" ;;

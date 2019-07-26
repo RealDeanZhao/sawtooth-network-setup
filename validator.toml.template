@@ -33,14 +33,14 @@ maximum_peer_connectivity = 10
 # signature_thread_pool_workers = 3
 
 # The host and port for Open TSDB database used for metrics
-# opentsdb_url = ''
+opentsdb_url = '$OPENTSDB_CONFIG_URL'
 
 # The name of the database used for storing metrics
-# opentsdb_db = ''
+opentsdb_db = '$OPENTSDB_CONFIG_DB'
 
-# opentsdb_username = ''
+opentsdb_username = '$OPENTSDB_CONFIG_USER'
 
-# opentsdb_password = ''
+opentsdb_password = '$OPENTSDB_CONFIG_PWD'
 
 # The type of authorization that must be performed for the different type of
 # roles on the network. The different supported authorization types are "trust"

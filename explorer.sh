@@ -2,7 +2,6 @@
 source ./common.sh
 
 function readInputs() {
-    getInputWithDefault "Please input the project name" "sawtooth-stats" SAWTOOTH_STATS_PROJECT_NAME $GREEN
     getInputWithDefault "Please enter the influxdb volume name" "sawtooth-stats-influxdb" SAWTOOTH_STATS_INFLUXDB_VOLUME $GREEN
     getInputWithDefault "Please enter the influxdb pore" 8086 SAWTOOTH_STATS_INFLUXDB_PORT $GREEN
     getInputWithDefault "Please enter the influxdb admin password" "adminpw" SAWTOOTH_STATS_INFLUXDB_ADMIN_PASSWORD $GREEN
@@ -12,12 +11,12 @@ function readInputs() {
 
 function generateComposeFile() {
     composeTemplate="$(cat ./docker-compose-metrics.yml.template)"
-    mkdir -p ./nodes/$SAWTOOTH_STATS_PROJECT_NAME
-    eval "echo \"$composeTemplate\"" >./nodes/$SAWTOOTH_STATS_PROJECT_NAME/docker-compose.yml
+    mkdir -p ./nodes/sawtooth-stats
+    eval "echo \"$composeTemplate\"" >./nodes/sawtooth-stats/docker-compose.yml
 }
 
 function runCompose() {
-    docker-compose -f ./nodes/$SAWTOOTH_STATS_PROJECT_NAME/docker-compose.yml up -d
+    docker-compose -f ./nodes/sawtooth-stats/docker-compose.yml up -d
 }
 
 function main() {

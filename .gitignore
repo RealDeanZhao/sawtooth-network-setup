@@ -11,4 +11,6 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 /nodes
+/projects
 /sawtooth-core
+/sawtooth-stats

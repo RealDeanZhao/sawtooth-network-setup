@@ -4,6 +4,7 @@ source ./common.sh
 function main() {
     echo -e $YELLOW'Please select an option: \n' \
         $GREEN'1) Setup Metrics \n' \
+        $PINK'2) Setup Sawtooth Explorer \n' \
         $RED'0) Exit'
 
     printf $WHITE'option: '$COLOR_END
