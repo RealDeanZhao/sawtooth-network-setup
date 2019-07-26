@@ -6,7 +6,10 @@ function main() {
         $GREEN'1) Create Basic Node \n' \
         $PINK'2) Create Genesis Batch \n' \
         $BLUE'3) Start Node \n' \
-        $RED'4) Exit'
+        $YELLOW'4) Stop Node \n' \
+        $PINK'5) Restart Node \n' \
+        $CYAN'6) Log \n' \
+        $RED'0) Exit'
 
     printf $WHITE'option: '$COLOR_END
 
@@ -22,7 +25,16 @@ function main() {
     3)
         ./node-start.sh $@
         ;;
-    3) ;;
+    4)
+        ./node-stop.sh $@
+        ;;
+    5)
+        ./node-restart.sh $@
+        ;;
+    6)
+        ./node-log.sh $@
+        ;;
+    0) echo "Bye" ;;
 
     esac
     docker rm -f sawtooth-network-setup
