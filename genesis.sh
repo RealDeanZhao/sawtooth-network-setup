@@ -2,6 +2,7 @@
 source ./common.sh
 
 function readInputs() {
+    getInputWithDefault "Please enter the node_name" "sawtooth_node" SAWTOOH_NODE_NAME $GREEN
     getInputWithDefault "Please enter the pbft_member_list" [""] PBFT_MEMBER_LIST $GREEN
 }
 
@@ -23,8 +24,8 @@ function generateGenesisBatch() {
 }
 
 function copyThings() {
-    mkdir -p /sawtooth-network-setup/data/lib
-    cp -r /var/lib/sawtooth /sawtooth-network-setup/data/lib
+    mkdir -p /sawtooth-network-setup/nodes/$SAWTOOH_NODE_NAME/lib
+    cp -r /var/lib/sawtooth /sawtooth-network-setup/nodes/$SAWTOOH_NODE_NAME/lib
 }
 
 function main() {

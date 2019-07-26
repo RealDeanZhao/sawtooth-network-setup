@@ -2,6 +2,7 @@
 source ./common.sh
 
 function readInputs() {
+    getInputWithDefault "Please enter the node_name" "sawtooth_node" SAWTOOH_NODE_NAME $GREEN
     getInputWithDefault "Please enter the bind_network" "tcp://0.0.0.0:8800" VALIDATOR_CONFIG_BIND_NETWORK $GREEN
     getInputWithDefault "Please enter the bind_compoenent" "tcp://0.0.0.0:4004" VALIDATOR_CONFIG_BIND_COMPONENT $GREEN
     getInputWithDefault "Please enter the bind_consensus" "tcp://0.0.0.0:5050" VALIDATOR_CONFIG_BIND_CONSENSUS $GREEN
@@ -18,13 +19,14 @@ function generateValadatorNetworkKeyPair() {
 }
 
 function copyThings() {
-    mkdir -p /sawtooth-network-setup/data/lib
-    mkdir -p /sawtooth-network-setup/data/etc
-    mkdir -p /sawtooth-network-setup/data/home
-    cp -r /var/lib/sawtooth /sawtooth-network-setup/data/lib
-    cp -r /etc/sawtooth /sawtooth-network-setup/data/etc
-    cp -r ~/.sawtooth /sawtooth-network-setup/data/home
+    mkdir -p /sawtooth-network-setup/nodes/$SAWTOOH_NODE_NAME/lib
+    mkdir -p /sawtooth-network-setup/nodes/$SAWTOOH_NODE_NAME/etc
+    mkdir -p /sawtooth-network-setup/nodes/$SAWTOOH_NODE_NAME/home
+    cp -r /var/lib/sawtooth /sawtooth-network-setup/nodes/$SAWTOOH_NODE_NAME/lib
+    cp -r /etc/sawtooth /sawtooth-network-setup/nodes/$SAWTOOH_NODE_NAME/etc
+    cp -r ~/.sawtooth /sawtooth-network-setup/nodes/$SAWTOOH_NODE_NAME/home
 }
+
 function initValidatorConfig() {
     generateValadatorNetworkKeyPair
     validatorConfigTemplate="$(cat /sawtooth-network-setup/validator.toml.template)"
@@ -33,7 +35,7 @@ function initValidatorConfig() {
 
 function generateComposeFile() {
     composeTemplate="$(cat /sawtooth-network-setup/docker-compose.yml.template)"
-    eval "echo \"$composeTemplate\"" >/sawtooth-network-setup/docker-compose.yml
+    eval "echo \"$composeTemplate\"" >/sawtooth-network-setup/nodes/$SAWTOOH_NODE_NAME/docker-compose.yml
 }
 
 function main() {

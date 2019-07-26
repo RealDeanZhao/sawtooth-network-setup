@@ -5,4 +5,4 @@ RUN mkdir -p configs
 
 RUN ls
 
-ENTRYPOINT [ "./setup.sh" ]
+CMD [ "./setup.sh" ]

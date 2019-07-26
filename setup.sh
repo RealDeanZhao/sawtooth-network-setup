@@ -7,7 +7,8 @@ function main() {
     echo -e $YELLOW'Please select an option: \n' \
         $GREEN'1) Create Basic Node \n' \
         $PINK'2) Create Genesis Batch \n' \
-        $RED'3) Exit'
+        $BLUE'3) Start Node \n' \
+        $RED'4) Exit'
 
     printf $WHITE'option: '$COLOR_END
 
@@ -15,10 +16,13 @@ function main() {
 
     case $option in
     1)
-        ./node.sh $@
+        docker run -it -v ${PWD}:/sawtooth-network-setup sawtooth-network-setup:latest ./node.sh $@
         ;;
     2)
-        ./genesis.sh $@
+        docker run -it -v ${PWD}:/sawtooth-network-setup sawtooth-network-setup:latest ./genesis.sh $@
+        ;;
+    3)
+        ./node-start.sh $@
         ;;
     3)
         flagmain=false
