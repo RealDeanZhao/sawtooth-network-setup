@@ -3,7 +3,7 @@ version: '3.6'
 services:
   $SAWTOOH_NODE_NAME-intkey-tp:
     image: hyperledger/sawtooth-intkey-tp-python:chime
-    container_name: sawtooth-intkey-tp-python
+    container_name: $SAWTOOH_NODE_NAME-intkey-tp
     expose:
       - 4004
     command: intkey-tp-python -C tcp://$SAWTOOH_NODE_NAME-validator:4004
@@ -11,7 +11,7 @@ services:
 
   $SAWTOOH_NODE_NAME-rest-api:
     image: hyperledger/sawtooth-rest-api:chime
-    container_name: sawtooth-rest-api
+    container_name: $SAWTOOH_NODE_NAME-rest-api
     ports:
      - 8008:8008
     expose:
@@ -26,7 +26,7 @@ services:
 
   $SAWTOOH_NODE_NAME-settings-tp:
     image: hyperledger/sawtooth-settings-tp:chime
-    container_name: sawtooth-settings-tp
+    container_name: $SAWTOOH_NODE_NAME-settings-tp
     expose:
       - 4004
     command: settings-tp -C tcp://$SAWTOOH_NODE_NAME-validator:4004
@@ -34,7 +34,7 @@ services:
 
   $SAWTOOH_NODE_NAME-validator:
     image: hyperledger/sawtooth-validator:chime
-    container_name: sawtooth-validator
+    container_name: $SAWTOOH_NODE_NAME-validator
     expose:
       - 4004
       - 5050
@@ -52,7 +52,7 @@ services:
 
   $SAWTOOH_NODE_NAME-pbft:
     image: hyperledger/sawtooth-pbft-engine:chime
-    container_name: sawtooth-pbft-engine
+    container_name: $SAWTOOH_NODE_NAME-pbft
     command: pbft-engine -vv --connect tcp://$SAWTOOH_NODE_NAME-validator:5050
     stop_signal: SIGKILL
     volumes:
@@ -62,7 +62,7 @@ services:
 
   $SAWTOOH_NODE_NAME-xo-tp:
     image: hyperledger/sawtooth-xo-tp-python:chime
-    container_name: sawtooth-xo-tp-python
+    container_name: $SAWTOOH_NODE_NAME-xo-tp
     expose:
       - 4004
     command: xo-tp-python -vv -C tcp://$SAWTOOH_NODE_NAME-validator:4004
