@@ -6,10 +6,10 @@ function readInputs() {
     getInputWithDefault "Please enter the endpoint port" "8800" VALIDATOR_CONFIG_ENDPOINT_PORT $GREEN
     getInputWithDefault "Please enter the peers" "\"\"" VALIDATOR_CONFIG_PEERS $GREEN
     getInputWithDefault "Please enter the rest api port" "8008" REST_API_CONFIG_PORT $GREEN
-    getInputWithDefault "Please enter the influx url" "http://127.0.0.1:8086" OPENTSDB_CONFIG_URL $GREEN
-    getInputWithDefault "Please enter the influx db" "metrics" OPENTSDB_CONFIG_DB $GREEN
-    getInputWithDefault "Please enter the influx user" "lrdata" OPENTSDB_CONFIG_USER $GREEN
-    getInputWithDefault "Please enter the influx password" "lrdatapw" OPENTSDB_CONFIG_PWD $GREEN
+    getInputWithDefault "Please enter the influx url" "" OPENTSDB_CONFIG_URL $GREEN
+    getInputWithDefault "Please enter the influx db" "" OPENTSDB_CONFIG_DB $GREEN
+    getInputWithDefault "Please enter the influx user" "" OPENTSDB_CONFIG_USER $GREEN
+    getInputWithDefault "Please enter the influx password" "" OPENTSDB_CONFIG_PWD $GREEN
 }
 
 function generateValadatorNetworkKeyPair() {

@@ -3,7 +3,7 @@ source ./common.sh
 
 function main() {
     echo -e $YELLOW'Please select an option: \n' \
-        $GREEN'1) Create Basic Node \n' \
+        $GREEN'1) Create Sawtooth Node \n' \
         $PINK'2) Create Genesis Batch \n' \
         $BLUE'3) Start Project \n' \
         $YELLOW'4) Stop Project \n' \
