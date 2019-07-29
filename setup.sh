@@ -7,8 +7,8 @@ function main() {
         $PINK'2) Create Genesis Batch \n' \
         $BLUE'3) Start Project \n' \
         $YELLOW'4) Stop Project \n' \
-        $PINK'5) Restart Project \n' \
-        $CYAN'l) Log \n' \
+        $CYAN'5) Restart Project \n' \
+        $PINK'l) Log \n' \
         $WHITE'x) Other Tools \n' \
         $RED'0) Exit'
 

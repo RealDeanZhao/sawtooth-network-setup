@@ -34,6 +34,10 @@ function generateComposeFile() {
 
 function main() {
     getInputWithDefault "Please enter the project name" "sawtooth_node" PROJECT_NAME $GREEN
+    if [ -d ./projects/"$PROJECT_NAME" ]; then
+        echo $RED"The folder already exists, please delete it first"
+        exit
+    fi
     generateKeys
     readInputs
     initValidatorConfig
