@@ -6,7 +6,7 @@ services:
     container_name: sawtooth-stats-influxdb
     ports:
       - $SAWTOOTH_STATS_INFLUXDB_PORT:8086
-    command: intkey-tp-python -C tcp://$SAWTOOH_NODE_NAME-validator:4004
+    command: intkey-tp-python -C tcp://$PROJECT_NAME-validator:4004
     volumes:
       - ./influx/data:/var/lib/influxdb
     environment:

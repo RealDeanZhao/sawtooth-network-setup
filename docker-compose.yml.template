@@ -1,17 +1,17 @@
 version: '3.6'
 
 services:
-  $SAWTOOH_NODE_NAME-intkey-tp:
+  $PROJECT_NAME-intkey-tp:
     image: hyperledger/sawtooth-intkey-tp-python:chime
-    container_name: $SAWTOOH_NODE_NAME-intkey-tp
+    container_name: $PROJECT_NAME-intkey-tp
     expose:
       - 4004
-    command: intkey-tp-python -C tcp://$SAWTOOH_NODE_NAME-validator:4004
+    command: intkey-tp-python -C tcp://$PROJECT_NAME-validator:4004
     stop_signal: SIGKILL
 
-  $SAWTOOH_NODE_NAME-rest-api:
+  $PROJECT_NAME-rest-api:
     image: hyperledger/sawtooth-rest-api:chime
-    container_name: $SAWTOOH_NODE_NAME-rest-api
+    container_name: $PROJECT_NAME-rest-api
     ports:
      - $REST_API_CONFIG_PORT:$REST_API_CONFIG_PORT
     expose:
@@ -19,22 +19,22 @@ services:
     command: |
       bash -c \"
         sawtooth-rest-api \\
-          --connect tcp://$SAWTOOH_NODE_NAME-validator:4004 \\
+          --connect tcp://$PROJECT_NAME-validator:4004 \\
           --bind 0.0.0.0:$REST_API_CONFIG_PORT
       \"
     stop_signal: SIGKILL
 
-  $SAWTOOH_NODE_NAME-settings-tp:
+  $PROJECT_NAME-settings-tp:
     image: hyperledger/sawtooth-settings-tp:chime
-    container_name: $SAWTOOH_NODE_NAME-settings-tp
+    container_name: $PROJECT_NAME-settings-tp
     expose:
       - 4004
-    command: settings-tp -C tcp://$SAWTOOH_NODE_NAME-validator:4004
+    command: settings-tp -C tcp://$PROJECT_NAME-validator:4004
     stop_signal: SIGKILL
 
-  $SAWTOOH_NODE_NAME-validator:
+  $PROJECT_NAME-validator:
     image: hyperledger/sawtooth-validator:chime
-    container_name: $SAWTOOH_NODE_NAME-validator
+    container_name: $PROJECT_NAME-validator
     expose:
       - 4004
       - 5050
@@ -50,20 +50,20 @@ services:
         sawtooth-validator -vv
       \"
 
-  $SAWTOOH_NODE_NAME-pbft:
+  $PROJECT_NAME-pbft:
     image: hyperledger/sawtooth-pbft-engine:chime
-    container_name: $SAWTOOH_NODE_NAME-pbft
-    command: pbft-engine -vv --connect tcp://$SAWTOOH_NODE_NAME-validator:5050
+    container_name: $PROJECT_NAME-pbft
+    command: pbft-engine -vv --connect tcp://$PROJECT_NAME-validator:5050
     stop_signal: SIGKILL
     volumes:
       - ./home/.sawtooth:/root/.sawtooth
       - ./etc/sawtooth:/etc/sawtooth
       - ./lib/sawtooth:/var/lib/sawtooth
 
-  $SAWTOOH_NODE_NAME-xo-tp:
+  $PROJECT_NAME-xo-tp:
     image: hyperledger/sawtooth-xo-tp-python:chime
-    container_name: $SAWTOOH_NODE_NAME-xo-tp
+    container_name: $PROJECT_NAME-xo-tp
     expose:
       - 4004
-    command: xo-tp-python -vv -C tcp://$SAWTOOH_NODE_NAME-validator:4004
+    command: xo-tp-python -vv -C tcp://$PROJECT_NAME-validator:4004
     stop_signal: SIGKILL
