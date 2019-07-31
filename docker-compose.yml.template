@@ -42,9 +42,9 @@ services:
     ports:
       - $VALIDATOR_CONFIG_ENDPOINT_PORT:$VALIDATOR_CONFIG_ENDPOINT_PORT
     volumes:
-      - ./home/.sawtooth:/root/.sawtooth
-      - ./etc/sawtooth:/etc/sawtooth
-      - ./lib/sawtooth:/var/lib/sawtooth
+      - ./home:/root/.sawtooth
+      - ./etc:/etc/sawtooth
+      - ./lib:/var/lib/sawtooth
     command: |
       bash -c \"
         sawtooth-validator -vv
@@ -56,9 +56,9 @@ services:
     command: pbft-engine -vv --connect tcp://$PROJECT_NAME-validator:5050
     stop_signal: SIGKILL
     volumes:
-      - ./home/.sawtooth:/root/.sawtooth
-      - ./etc/sawtooth:/etc/sawtooth
-      - ./lib/sawtooth:/var/lib/sawtooth
+      - ./home:/root/.sawtooth
+      - ./etc:/etc/sawtooth
+      - ./lib:/var/lib/sawtooth
 
   $PROJECT_NAME-xo-tp:
     image: hyperledger/sawtooth-xo-tp-python:chime
