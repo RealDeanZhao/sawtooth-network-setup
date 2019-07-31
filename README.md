@@ -10,7 +10,7 @@
 ![3](img/3.png)
 ### 1.3 输入endpoint以及port，如无特殊需求，默认值即可
 ![4](img/4.png)
-### 1.4 输入peers，要求包含网络所有的endpoint的ip及端口，实例如下：
+### 1.4 输入peers，要求包含网络所有的endpoint的ip及端口，示例如下：
 ![5](img/5.png)
 ### 1.5 输入rest api端口，默认即可
 ![6](img/6.png)
