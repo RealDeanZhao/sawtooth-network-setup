@@ -8,10 +8,9 @@ function readInputs() {
 
 function generateGenesisBatch() {
     echo "Generate genesis config"
-    docker rm -f tmp-sawtooth-shell-cmd
     MY_KEY_FILE=/root/.sawtooth/keys/my_key.priv
 
-    docker run \
+    docker run --rm \
         -v $PWD/projects/$PROJECT_NAME/etc:/etc/sawtooth \
         -v $PWD/projects/$PROJECT_NAME/lib:/var/lib/sawtooth \
         -v $PWD/projects/$PROJECT_NAME/home:/root/.sawtooth \
@@ -26,7 +25,6 @@ function generateGenesisBatch() {
 
         echo \"Generating genesis.batch\"
         sawadm genesis config-genesis.batch config-consensus.batch"
-    docker rm -f tmp-sawtooth-shell-cmd
 }
 
 function copyThings() {
