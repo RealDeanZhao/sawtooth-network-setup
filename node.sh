@@ -15,7 +15,9 @@ function readInputs() {
 function generateValadatorNetworkKeyPair() {
     echo $YELLOW"Please enter the exsisting network key pair or copy/paste the random value below:"
     echo $RED"=========Same sawtooth network should use same key pair======================="
-    python3 ./network_key_pair.py
+    docker run --rm \
+        -v $PWD:/usr/src/zmq-keypair \
+        python:3 bash -c "pip install zmq && python /usr/src/zmq-keypair/network_key_pair.py"
     echo $RED"=============================================================================="
     getInputWithDefault "Please enter the network public key" "" VALIDATOR_CONFIG_NETWORK_PUBLIC_KEY $GREEN
     getInputWithDefault "Please enter the network private key" "" VALIDATOR_CONFIG_NETWORK_PRIVATE_KEY $GREEN
