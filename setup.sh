@@ -19,28 +19,28 @@ function main() {
 
     case $option in
     0)
-        ./node.sh $@
+        ./lib/dependency.sh $@
         ;;
     1)
-        ./node.sh $@
+        ./lib/node.sh $@
         ;;
     2)
-        ./genesis.sh $@
+        ./lib/genesis.sh $@
         ;;
     3)
-        ./node-start.sh $@
+        ./lib/node-start.sh $@
         ;;
     4)
-        ./node-stop.sh $@
+        ./lib/node-stop.sh $@
         ;;
     5)
-        ./node-restart.sh $@
+        ./lib/node-restart.sh $@
         ;;
     l)
-        ./node-log.sh $@
+        ./lib/node-log.sh $@
         ;;
     x)
-        ./tools.sh $@
+        ./lib/tools.sh $@
         ;;
     0) echo "Bye" ;;
 

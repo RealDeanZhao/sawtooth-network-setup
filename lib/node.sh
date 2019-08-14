@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./common.sh
+source ./lib/common.sh
 
 function readInputs() {
     getInputWithDefault "Please enter the endpoint" "tcp://0.0.0.0" VALIDATOR_CONFIG_ENDPOINT $GREEN
@@ -17,7 +17,7 @@ function generateValadatorNetworkKeyPair() {
     echo $RED"=========Same sawtooth network should use same key pair======================="
     docker run --rm \
         -v $PWD:/usr/src/zmq-keypair \
-        python:3 bash -c "pip install zmq && python /usr/src/zmq-keypair/network_key_pair.py"
+        python:3 bash -c "pip install zmq && python /usr/src/zmq-keypair/lib/network_key_pair.py"
     echo $RED"=============================================================================="
     getInputWithDefault "Please enter the network public key" "" VALIDATOR_CONFIG_NETWORK_PUBLIC_KEY $GREEN
     getInputWithDefault "Please enter the network private key" "" VALIDATOR_CONFIG_NETWORK_PRIVATE_KEY $GREEN
@@ -25,12 +25,12 @@ function generateValadatorNetworkKeyPair() {
 
 function initValidatorConfig() {
     generateValadatorNetworkKeyPair
-    validatorConfigTemplate="$(cat $PWD/validator.toml.template)"
+    validatorConfigTemplate="$(cat $PWD/tmpl/validator.toml.template)"
     eval "echo \"$validatorConfigTemplate\"" >./projects/$PROJECT_NAME/etc/validator.toml
 }
 
 function generateComposeFile() {
-    composeTemplate="$(cat $PWD/docker-compose.yml.template)"
+    composeTemplate="$(cat $PWD/tmpl/docker-compose.yml.template)"
     eval "echo \"$composeTemplate\"" >./projects/$PROJECT_NAME/docker-compose.yml
 }
 

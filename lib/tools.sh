@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./common.sh
+source ./lib/common.sh
 
 function main() {
     echo -e $YELLOW'Please select an option: \n' \

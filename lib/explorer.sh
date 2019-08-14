@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./common.sh
+source ./lib/common.sh
 
 function readInputs() {
     getInputWithDefault "Please enter the influxdb volume name" "sawtooth-stats-influxdb" SAWTOOTH_STATS_INFLUXDB_VOLUME $GREEN

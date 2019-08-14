@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./common.sh
+source ./lib/common.sh
 
 function readInputs() {
     getInputWithDefault "Please input the project name" "sawtooth-stats" SAWTOOTH_STATS_PROJECT_NAME $GREEN
@@ -11,7 +11,7 @@ function readInputs() {
 }
 
 function generateComposeFile() {
-    composeTemplate="$(cat ./docker-compose-metrics.yml.template)"
+    composeTemplate="$(cat ./tmpl/docker-compose-metrics.yml.template)"
     mkdir -p ./nodes/$SAWTOOTH_STATS_PROJECT_NAME
     eval "echo \"$composeTemplate\"" >./nodes/$SAWTOOTH_STATS_PROJECT_NAME/docker-compose.yml
 }

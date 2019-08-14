@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./common.sh
+source ./lib/common.sh
 
 function readInputs() {
     getInputWithDefault "Please enter the project name" "sawtooth_node" PROJECT_NAME $GREEN

@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./common.sh
+source ./lib/common.sh
 
 function installDocker() {
     curl -sSL https://get.daocloud.io/docker | sh
